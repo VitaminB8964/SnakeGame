@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.Random;
 
-import static potatochipscn.CheckFile.*;
 
 public class SnakeGame extends JFrame implements ActionListener {
     private final int WIDTH = 500; // 游戏窗口的宽度
@@ -26,21 +25,13 @@ public class SnakeGame extends JFrame implements ActionListener {
 
     public SnakeGame() {
         setTitle("贪吃蛇游戏");
-        setSize(WIDTH, HEIGHT);
+        setSize((WIDTH), (HEIGHT));
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
 
         addKeyListener(new MyKeyAdapter());
-        File file = new File("C:/snakegamedata.txt");
-        if (nmsl){
-
-        }else{
-            Text.createDataFile();
-            Text.writetoFile(1);
-        }
-        Text.readFile();
         startGame();
 
     }
@@ -63,8 +54,8 @@ public class SnakeGame extends JFrame implements ActionListener {
 
     public void placeFood() {
         Random random = new Random();
-        foodX = random.nextInt(WIDTH / UNIT_SIZE) * UNIT_SIZE;
-        foodY = random.nextInt(HEIGHT / UNIT_SIZE) * UNIT_SIZE;
+        foodX = random.nextInt((WIDTH-50) / UNIT_SIZE) * UNIT_SIZE;
+        foodY = random.nextInt((HEIGHT-50) / UNIT_SIZE) * UNIT_SIZE;
     }
 
     public void move() {
@@ -124,7 +115,7 @@ public class SnakeGame extends JFrame implements ActionListener {
 
         if (isRunning) {
             // 绘制食物
-            g.setColor(Color.RED);
+            g.setColor(Color.red);
             g.fillRect(foodX, foodY, UNIT_SIZE, UNIT_SIZE);
 
             // 绘制蛇身
@@ -145,9 +136,7 @@ public class SnakeGame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (isRunning) {
             move();
-            checkFoodCollision();
-            checkWallCollision();
-            checkSelfCollision();
+            checkFoodCollision(); checkWallCollision();checkSelfCollision();
         }
 
         if (!isRunning) {
@@ -184,10 +173,12 @@ public class SnakeGame extends JFrame implements ActionListener {
                     gameOver();
                     break;
                 case KeyEvent.VK_HOME:
-                    foodEaten+=10;
+                    foodEaten+=114514;
+                    System.out.println("你的蛇蛇吃饭了！");
                     break;
                 case KeyEvent.VK_INSERT:
-                    snakeLength++;
+                    snakeLength+=3;
+                    System.out.println("你的蛇蛇变长了！");
 
             }
         }
