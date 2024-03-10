@@ -3,7 +3,6 @@ package potatochipscn;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.util.Random;
 
 
@@ -98,6 +97,7 @@ public class SnakeGame extends JFrame implements ActionListener {
         for (int i = snakeLength; i > 0; i--) {
             if (x[0] == x[i] && y[0] == y[i]) {
                 isRunning = false;
+                break;
             }
         }
     }
@@ -105,8 +105,14 @@ public class SnakeGame extends JFrame implements ActionListener {
     public void gameOver() {
         timer.stop();
         JOptionPane.showMessageDialog(this, "游戏结束！你吃掉了 " + foodEaten + " 个食物。", "游戏结束", JOptionPane.INFORMATION_MESSAGE);
-        foodEaten =0;direction='D';snakeLength=6;
+        int gameagain = JOptionPane.showConfirmDialog(this,"再来一把?","Snake Game",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE);
+        if (gameagain == 0){
+            foodEaten =0;direction='D';snakeLength=6;
             startGame();
+        }
+        else{
+            System.exit(0);
+        }
     }
 
     @Override
